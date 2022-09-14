@@ -41,31 +41,33 @@ class Transfer(App):
         return self.window
 
     def callback(self, instance):
-        n = self.user.text
-
         l1 = ["один", "два", "три", "чотири", "п‘ять", "шість", "сім", "вісім", "дев‘ять",
               "десять", "одинадцять", "дванадцять", "тринадцять", "чотирнадцять", "п‘ятнадцать",
               "шістнадцять", "сімнадцять", "вісімнадцять", "дев‘ятнадцять", "двадцять"]
         l2 = ["двадцять", "тридцять", "сорок", "п‘ятдесят", "шістдесят", "сімдесят", "вісімдесят", 'дев‘яносто']
 
-        if int(n) <= -1 or int(n) >= 100:
-            self.number.text = 'Only numbers in range 1-99'
+        n = self.user.text
 
-        if int(n) <= 20 and int(n) >= 1:
-            self.number.text = l1[int(n) - 1]
-        elif int(n) > 20 and int(n) < 100:
-            d = int(n) // 10
-            o = int(n) % 10
-            if d == 2:
-                aab = l2[d - 2], l1[o - 1]
-                ab = ' '.join(aab)
-                self.number.text = ab
-            if o >= 1:
-                a = l2[d - 2], l1[o - 1]
-                aa = ' '.join(a)
-                self.number.text = aa
-            if o == 0:
-                self.number.text = l2[d - 2]
+        if n.isdigit() == False:
+            self.number.text = 'Only numbers not words'
+        if n.isdigit() == True:
+            if int(n) <= -1 or int(n) >= 100:
+                self.number.text = 'Only numbers in range 1-99'
+            if int(n) <= 20 and int(n) >= 1:
+                self.number.text = l1[int(n) - 1]
+            elif int(n) > 20 and int(n) < 100:
+                d = int(n) // 10
+                o = int(n) % 10
+                if d == 2:
+                    aab = l2[d - 2], l1[o - 1]
+                    ab = ' '.join(aab)
+                    self.number.text = ab
+                if o >= 1:
+                    a = l2[d - 2], l1[o - 1]
+                    aa = ' '.join(a)
+                    self.number.text = aa
+                if o == 0:
+                    self.number.text = l2[d - 2]
 
 if __name__ == '__main__':
     Transfer().run()
